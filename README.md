@@ -1,4 +1,4 @@
-# Granola → JIRA + Slack Meeting Automator
+#  Customer Interviews to Action Automator
 
 Automatically create JIRA engineering tickets and post Slack summaries from your Granola meeting notes — triggered by your calendar, runs entirely on your machine.
 
