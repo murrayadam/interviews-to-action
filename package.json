@@ -1,0 +1,24 @@
+{
+  "name": "granola-meeting-automator",
+  "version": "2.0.0",
+  "description": "Polls Granola's local API for new meetings, creates JIRA tickets and Slack summaries automatically",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "scheduler": "tsx src/scheduler.ts",
+    "dev": "tsx watch src/scheduler.ts",
+    "process": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@slack/web-api": "^7.8.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "dotenv": "^16.4.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
