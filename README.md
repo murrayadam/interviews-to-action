@@ -58,7 +58,20 @@ You only need three sets of credentials:
 
 - **Granola** installed and signed in
 - **macOS Calendar.app** synced with your Google Calendar (System Settings → Internet Accounts → Google)
-- First launch may require granting Terminal/iTerm **Full Disk Access** in System Settings → Privacy & Security (needed to read the Calendar database)
+
+**macOS Permissions (required):**
+
+This app reads the Calendar database directly, which requires Full Disk Access:
+
+1. Open **System Settings** → **Privacy & Security** → **Full Disk Access**
+2. Click the **+** button and add your terminal app:
+   - **Terminal.app** (if using the default terminal)
+   - **iTerm** (if using iTerm2)
+   - **Visual Studio Code** (if running from VS Code's integrated terminal)
+   - **Warp**, **Alacritty**, etc. (whichever terminal you use)
+3. **Restart your terminal** after granting access
+
+If you see `authorization denied` or `Operation not permitted` errors when running the scheduler, this permission is missing.
 
 ### 4. Verify
 

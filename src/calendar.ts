@@ -60,18 +60,18 @@ const parseRows = (raw: string): CalendarEvent[] => {
 
   const rows = JSON.parse(raw) as Array<{
     ROWID: number;
-    ZSUMMARY: string;
-    ZSTARTDATE: number;
-    ZENDDATE: number;
-    ZTITLE: string | null;
+    summary: string;
+    start_date: number;
+    end_date: number;
+    title: string | null;
   }>;
 
   return rows.map((row) => ({
     id: String(row.ROWID),
-    summary: row.ZSUMMARY,
-    start: toJsDate(row.ZSTARTDATE),
-    end: toJsDate(row.ZENDDATE),
-    calendarName: row.ZTITLE ?? "Unknown",
+    summary: row.summary,
+    start: toJsDate(row.start_date),
+    end: toJsDate(row.end_date),
+    calendarName: row.title ?? "Unknown",
   }));
 };
 
@@ -95,17 +95,17 @@ export const fetchTodaysEvents = async (): Promise<CalendarEvent[]> => {
   const sql = `
     SELECT
       ci.ROWID,
-      ci.ZSUMMARY,
-      ci.ZSTARTDATE,
-      ci.ZENDDATE,
-      c.ZTITLE
-    FROM ZCALENDARITEM ci
-    LEFT JOIN ZCALENDAR c ON ci.ZCALENDAR = c.Z_PK
-    WHERE ci.ZSTARTDATE >= ${startApple}
-      AND ci.ZSTARTDATE < ${endApple}
-      AND ci.ZSTARTDATE != ci.ZENDDATE
-      AND ci.ZSUMMARY IS NOT NULL
-    ORDER BY ci.ZSTARTDATE ASC;
+      ci.summary,
+      ci.start_date,
+      ci.end_date,
+      c.title
+    FROM CalendarItem ci
+    LEFT JOIN Calendar c ON ci.calendar_id = c.ROWID
+    WHERE ci.start_date >= ${startApple}
+      AND ci.start_date < ${endApple}
+      AND ci.start_date != ci.end_date
+      AND ci.summary IS NOT NULL
+    ORDER BY ci.start_date ASC;
   `.trim();
 
   try {
